@@ -244,6 +244,12 @@ in
           preStart = ''
             mkdir -p ${cfg.dataDir}/config
             cp -f ${cfgFile} ${cfg.dataDir}/config/config.yml
+
+            chmod -R u+w ${cfg.dataDir}/.next 2>/dev/null || true
+            rm -rf ${cfg.dataDir}/.next
+            cp -r ${cfg.package}/share/pangolin/.next ${cfg.dataDir}/.next
+            chmod -R u+w ${cfg.dataDir}/.next
+            mkdir ${cfg.dataDir}/.next/cache
           '';
 
           serviceConfig = {
